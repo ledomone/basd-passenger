@@ -1,6 +1,7 @@
 using System;
 using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
+using Passenger.Infrastructure.DTO;
 
 namespace Passenger.Infrastructure.Services
 {
@@ -11,6 +12,20 @@ namespace Passenger.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
+
+        public UserDto Get(string email)
+        {
+            var user = _userRepository.Get(email);
+
+            return new UserDto
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email,
+                Fullname = user.Fullname
+            };
+        }
+
         public void Register(string email, string username, string password)
         {
             var user = _userRepository.Get(email);
@@ -18,6 +33,7 @@ namespace Passenger.Infrastructure.Services
             {
                 throw new Exception($"User with email: '{email}' already exists.");
             }
+
             var salt = Guid.NewGuid().ToString("N");
             user = new User(email, username, password, salt);
             _userRepository.Add(user);
