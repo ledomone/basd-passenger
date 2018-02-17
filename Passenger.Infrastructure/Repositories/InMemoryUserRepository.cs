@@ -9,7 +9,13 @@ namespace Passenger.Infrastructure.Repositories
     public class InMemoryUserRepository : IUserRepository
     {
 
-        private static ISet<User> _users = new HashSet<User>();
+        private static ISet<User> _users = new HashSet<User>{
+            new User("user1@email.com", "user1", "secret", "salt"),
+            new User("user2@email.com", "user2", "secret", "salt"),
+            new User("user3@email.com", "user3", "secret", "salt"),
+            new User("user4@email.com", "user4", "secret", "salt"),
+            new User("user5@email.com", "user5", "secret", "salt"),
+        };
 
         public void Add(User user)
         {
