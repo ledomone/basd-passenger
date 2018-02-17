@@ -20,7 +20,7 @@ namespace Passenger.Core.Domain
                     string password, string salt)
         {
             Id = Guid.NewGuid();
-            Email = email;
+            Email = email.ToLowerInvariant();
             Username = username;
             Password = password;
             Salt = salt;
