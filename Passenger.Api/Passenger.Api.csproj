@@ -19,5 +19,8 @@
     <ProjectReference Include="..\Passenger.Infrastructure\Passenger.Infrastructure.csproj" />
   </ItemGroup>
   
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+  </ItemGroup>
   
 </Project>
