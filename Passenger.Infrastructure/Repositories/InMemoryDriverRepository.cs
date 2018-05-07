@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 
@@ -14,20 +15,27 @@ namespace Passenger.Infrastructure.Repositories
         {
         };
 
-        public void Add(Driver driver)
+        public async Task<Driver> GetAsync(Guid userId)
+            => await Task.FromResult(_drivers.SingleOrDefault(x => x.UserId == userId));
+
+        public async Task<IEnumerable<Driver>> GetAllAsync()
+            => await Task.FromResult(_drivers);
+
+        public async Task AddAsync(Driver driver)
         {
             _drivers.Add(driver);
+            await Task.CompletedTask;
         }
 
-        public void Update(Driver driver)
+        public async Task UpdateAsync(Driver driver)
         {
-            throw new NotImplementedException();
+            await Task.CompletedTask;
         }
 
-        Driver IDriverRepository.Get(Guid userId)
-            => _drivers.Single(x => x.UserId == userId);
-
-        IEnumerable<Driver> IDriverRepository.GetAll()
-            => _drivers;
+        public async Task RemoveAsync(Driver driver)
+        {
+            _drivers.Remove(driver);
+            await Task.CompletedTask;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
@@ -16,25 +17,27 @@ namespace Passenger.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public void Create(Guid userId)
+        public async Task Create(Guid userId)
         {
-            throw new NotImplementedException();
+            await Task.CompletedTask;
         }
 
-        public void Delete(Guid userId)
+        public async Task Delete(Guid userId)
         {
-            throw new NotImplementedException();
+            var driver = await _driverRepository.GetAsync(userId);
+            await _driverRepository.RemoveAsync(driver);
         }
 
-        public DriverDto Get(Guid userId)
+        public async Task<DriverDto> GetAsync(Guid userId)
         {
-            var driver = _driverRepository.Get(userId);
+            var driver = await _driverRepository.GetAsync(userId);
             return _mapper.Map<Driver, DriverDto>(driver);
         }
 
-        public void SetVehicle(Guid userId, string brand, string name)
+        public async Task SetVehicle(Guid userId, string brand, string name)
         {
-            throw new NotImplementedException();
+            await Task.CompletedTask;
         }
+
     }
 }
